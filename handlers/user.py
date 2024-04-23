@@ -19,6 +19,7 @@ user_router = Router()
 
 
 # Этот хэндлер срабатывает на команду /start
+### @user_router.message(MyFalseFilter(), CommandStart())
 @user_router.message(CommandStart(), MyTrueFilter())
 async def process_start_command(message: Message):
     logger.debug('Вошли в хэндлер, обрабатывающий команду /start')

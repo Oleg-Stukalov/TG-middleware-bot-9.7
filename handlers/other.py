@@ -2,7 +2,7 @@ import logging
 
 from aiogram import Router
 from aiogram.types import Message
-from filters.filters import MyTrueFilter
+from filters.filters import MyTrueFilter, MyFalseFilter
 from lexicon.lexicon import LEXICON_RU
 
 logger = logging.getLogger(__name__)
@@ -10,7 +10,8 @@ logger = logging.getLogger(__name__)
 # Инициализируем роутер уровня модуля
 other_router = Router()
 
-
+# Теперь этот хэндлер не будет срабатывать вообще
+### @other_router.message(MyFalseFilter())
 # Этот хэндлер будет срабатывать на любые сообщения,
 # кроме тех, для которых есть отдельные хэндлеры
 @other_router.message(MyTrueFilter())

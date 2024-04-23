@@ -23,6 +23,7 @@ class FirstOuterMiddleware(BaseMiddleware):
         )
 
         result = await handler(event, data)
+        #return  # obvious return None (update DROP!)
 
         logger.debug('Выходим из миддлвари  %s', __class__.__name__)
 
