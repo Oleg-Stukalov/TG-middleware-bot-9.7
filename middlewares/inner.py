@@ -26,7 +26,7 @@ class FirstInnerMiddleware(BaseMiddleware):
 
         logger.debug('Выходим из миддлвари  %s', __class__.__name__)
 
-        return ### result
+        ###return ###result
 
 
 class SecondInnerMiddleware(BaseMiddleware):
@@ -48,7 +48,7 @@ class SecondInnerMiddleware(BaseMiddleware):
 
         logger.debug('Выходим из миддлвари  %s', __class__.__name__)
 
-        ###return #result
+        return #result
 
 
 class ThirdInnerMiddleware(BaseMiddleware):
