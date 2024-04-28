@@ -17,8 +17,11 @@ class TranslatorMiddleware(BaseMiddleware):
         if user is None:
             return await handler(event, data)
 
-        #user_lang = user.language_code
-        user_lang = 'en'
+        user_lang = user.language_code
+        #print()
+        #print(user_lang)
+        #print()
+        #user_lang = 'en'
 
         translations = data.get('_translations')
 
@@ -27,8 +30,8 @@ class TranslatorMiddleware(BaseMiddleware):
             data['i18n'] = translations[translations['default']]
         else:
             data['i18n'] = i18n
-        print()
-        print('i18n middleware lang dict: ', i18n)
-        print()
+        #print()
+        #print('i18n middleware lang dict: ', i18n)
+        #print()
 
         return await handler(event, data)
