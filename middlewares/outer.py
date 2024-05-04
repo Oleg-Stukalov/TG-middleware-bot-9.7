@@ -23,11 +23,17 @@ class FirstOuterMiddleware(BaseMiddleware):
         )
 
         result = await handler(event, data)
-        #return  # obvious return None (update DROP!)
 
         logger.debug('Выходим из миддлвари  %s', __class__.__name__)
 
+        '''При этом, если вы выведите на мечать в миддлвари result,
+        то вы увидите None. Но return None, как оказывается, не то же самое,
+        что return result. В общем, не совсем очевидное поведение.'''
+
+        print('RESULT!!!: ', result)
+        ###return #result
         return result
+        ###return None
 
 
 class SecondOuterMiddleware(BaseMiddleware):

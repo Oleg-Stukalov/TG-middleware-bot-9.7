@@ -2,6 +2,7 @@ from typing import Any, Awaitable, Callable, Dict
 
 from aiogram import BaseMiddleware
 from aiogram.types import TelegramObject, User
+import pprint
 
 
 class TranslatorMiddleware(BaseMiddleware):
@@ -11,7 +12,9 @@ class TranslatorMiddleware(BaseMiddleware):
         event: TelegramObject,
         data: Dict[str, Any]
     ) -> Any:
-
+        print('--------------')
+        print('DATA!!!: ', data)
+        print('--------------')
         user: User = data.get('event_from_user')
 
         if user is None:

@@ -9,7 +9,7 @@ from aiogram.types import (
     Message,
 )
 from filters.filters import MyFalseFilter, MyTrueFilter
-
+from lexicon.lexicon_ru import LEXICON_RU
 
 # Инициализируем логгер модуля
 logger = logging.getLogger(__name__)
@@ -19,35 +19,32 @@ user_router = Router()
 
 
 # Этот хэндлер срабатывает на команду /start
-### @user_router.message(MyFalseFilter(), CommandStart())
 @user_router.message(CommandStart(), MyTrueFilter())
-async def process_start_command(message: Message, i18n: dict[str, str]):
+async def process_start_command(message: Message):
     logger.debug('Вошли в хэндлер, обрабатывающий команду /start')
     # Создаем объект инлайн-кнопки
     button = InlineKeyboardButton(
-        text=i18n.get('button'),
+        text='Кнопка',
         callback_data='button_pressed'
     )
     # Создаем объект инлайн-клавиатуры
     markup = InlineKeyboardMarkup(inline_keyboard=[[button]])
     # Отправляем сообщение пользователю
-    await message.answer(text=i18n.get('/start'), reply_markup=markup)
+    await message.answer(text=LEXICON_RU['/start'], reply_markup=markup)
     logger.debug('Выходим из хэндлера, обрабатывающего команду /start')
 
 
 # Этот хэндлер срабатывает на нажатие инлайн-кнопки
 @user_router.callback_query(F.data, MyTrueFilter())
-async def process_button_click(callback: CallbackQuery, i18n: dict[str, str]):
+async def process_button_click(callback: CallbackQuery):
     logger.debug('Вошли в хэндлер, обрабатывающий нажатие на инлайн-кнопку')
-    #await callback.answer(text=LEXICON_RU['button_pressed'])
-    await callback.answer(text=i18n.get('button_presses'))
-
+    await callback.answer(text=LEXICON_RU['button_pressed'])
     logger.debug('Выходим из хэндлера, обрабатывающего нажатие на инлайн-кнопку')
 
 
 # Это хэндлер, который мог бы обрабатывать любой текст,
 # но `MyFalseFilter` его не пропустит
 @user_router.message(F.text, MyFalseFilter())
-async def process_text(message: Message, i18n: dict[str, str]):
+async def process_text(message: Message):
     logger.debug('Вошли в хэндлер, обрабатывающий текст')
     logger.debug('Выходим из хэндлера, обрабатывающего текст')
